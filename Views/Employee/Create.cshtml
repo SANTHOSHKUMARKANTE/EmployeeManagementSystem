@@ -1,0 +1,108 @@
+@model EmployeeManagementSystem.Models.ViewModels.EmployeeViewModel
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="card-title mb-0">
+                        <i class="fas fa-user-plus me-2"></i>Create New Employee
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post" class="needs-validation" novalidate>
+                        @Html.AntiForgeryToken()
+
+                        <!-- Employee Name -->
+                        <div class="mb-3">
+                            <label asp-for="Employee.EmployeeName" class="form-label fw-bold"></label>
+                            <input asp-for="Employee.EmployeeName" class="form-control form-control-lg" placeholder="Enter full name" required />
+                            <span asp-validation-for="Employee.EmployeeName" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Age -->
+                        <div class="mb-3">
+                            <label asp-for="Employee.Age" class="form-label fw-bold"></label>
+                            <input asp-for="Employee.Age" type="number" class="form-control" min="18" max="30" required />
+                            <span asp-validation-for="Employee.Age" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Department Dropdown -->
+                        <div class="mb-4">
+                            <label asp-for="Employee.DepartmentId" class="form-label fw-bold"></label>
+                            <select asp-for="Employee.DepartmentId" class="form-select" required
+                                    asp-items="@(new SelectList(Model.Departments, "DepartmentId", "DepartmentName"))">
+                                <option value="">-- Select Department --</option>
+                            </select>
+                            <span asp-validation-for="Employee.DepartmentId" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Form Buttons -->
+                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            <a asp-action="Index" class="btn btn-outline-secondary me-md-2">
+                                <i class="fas fa-arrow-left me-1"></i> Back to List
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-1"></i> Create Employee
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <style>
+        .card {
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        .form-control, .form-select {
+            border-radius: 0.25rem;
+            padding: 0.5rem 1rem;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: #86b7fe;
+            box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+        }
+        .was-validated .form-control:invalid,
+        .was-validated .form-select:invalid {
+            border-color: #dc3545;
+        }
+        .was-validated .form-control:valid,
+        .was-validated .form-select:valid {
+            border-color: #28a745;
+        }
+    </style>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <!-- Updated Font Awesome (your version was outdated) -->
+    <script src="https://kit.fontawesome.com/your-code-here.js" crossorigin="anonymous"></script>
+    
+    <script>
+        // Enhanced form validation UX
+        (function () {
+            'use strict'
+            
+            // Fetch all forms we want to apply custom validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+            
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
+    </script>
+}
