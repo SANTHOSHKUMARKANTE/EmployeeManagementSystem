@@ -134,3 +134,4 @@ C:\Users\admin\OneDrive\Desktop\VSCode\EmployeeManagementSystem\obj\Debug\net8.0
 C:\Users\admin\OneDrive\Desktop\VSCode\EmployeeManagementSystem\obj\Debug\net8.0\EmployeeManagementSystem.pdb
 C:\Users\admin\OneDrive\Desktop\VSCode\EmployeeManagementSystem\obj\Debug\net8.0\EmployeeManagementSystem.genruntimeconfig.cache
 C:\Users\admin\OneDrive\Desktop\VSCode\EmployeeManagementSystem\obj\Debug\net8.0\ref\EmployeeManagementSystem.dll
+C:\Users\admin\OneDrive\Desktop\VSCode\EmployeeManagementSystem\obj\Debug\net8.0\EmployeeManagementSystem.sourcelink.json

@@ -37,40 +37,32 @@ namespace EmployeeManagementSystem.Controllers
             return View(viewModel);
         }
 
+        
+        // GET: Employee/Create
         [HttpGet]
         public IActionResult Create()
         {
-            var viewModel = new EmployeeViewModel
+            var vm = new EmployeeViewModel
             {
                 Departments = _departmentRepository.GetAllDepartments().ToList()
             };
-            return View(viewModel);
+            return View(vm);
         }
 
+        // POST: Employee/Create
         [HttpPost]
-public IActionResult Create(EmployeeViewModel viewModel)
-{
-    // Remove Department navigation property from validation
-    ModelState.Remove("Employee.Department");
-    
-    if (ModelState.IsValid)
-    {
-        try
+        
+        public IActionResult Create(EmployeeViewModel vm)
         {
-            _employeeRepository.AddEmployee(viewModel.Employee);
-            return RedirectToAction("Index");
-        }
-        catch (Exception ex)
-        {
-            ModelState.AddModelError("", "Error saving employee: " + ex.Message);
-        }
-    }
-    
-    // Repopulate departments if validation fails
-    viewModel.Departments = _departmentRepository.GetAllDepartments().ToList();
-    return View(viewModel);
-}
+            if (!ModelState.IsValid)
+            {
+                vm.Departments = _departmentRepository.GetAllDepartments().ToList();
+                return View(vm);
+            }
 
+            _employeeRepository.AddEmployee(vm.Employee);
+            return RedirectToAction(nameof(Index));
+        }
 
 
 
